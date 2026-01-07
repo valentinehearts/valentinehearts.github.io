@@ -96,7 +96,7 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
         .heart-shape::after {
             content: '';
             position: absolute;
-            width: 100%;
+            width: 101%;
             height: 160%;
             background: var(--heart-color, var(--primary-pink));
             border-radius: 50% 50% 0 0;
@@ -1548,7 +1548,7 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                     animation-duration: ${duration}s;
                 `;
 
-                heart.innerHTML = `<div class="heart-shape" style="--heart-color: ${color}"></div>`;
+               heart.innerHTML = `<div class="heart-shape"></div>`;
 
                 // Add message to heart
                 const allMessages = [...this.state.messages, ...this.state.customMessages];
