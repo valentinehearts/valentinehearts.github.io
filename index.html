@@ -77,45 +77,41 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
             animation: floatUp linear forwards;
             pointer-events: auto;
             cursor: pointer;
-            filter: drop-shadow(0 0 10px rgba(255, 107, 157, 0.4));
+            filter: drop-shadow(0 0 10px rgba(255, 107, 157, 0.5));
             transition: transform 0.2s ease;
         }
 
         .floating-heart:hover {
             transform: scale(1.3);
-            filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.7));
+            filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.8));
         }
 
         .heart-shape {
             position: relative;
             width: 100%;
             height: 100%;
-            /* Зміщуємо вгору, щоб низ (хвостик) був центром елемента */
-            transform: translateY(-25%);
         }
 
-        /* ВИПРАВЛЕНА ГЕОМЕТРІЯ СЕРДЕЧКА */
         .heart-shape::before,
         .heart-shape::after {
             content: '';
             position: absolute;
             width: 100%;
-            height: 100%;
-            /* Обидві частини використовують одну змінну кольору */
+            height: 160%;
             background: var(--heart-color, var(--primary-pink));
             border-radius: 50% 50% 0 0;
         }
 
         .heart-shape::before {
-            left: 50%;
-            transform: translateX(-50%) rotate(-45deg);
-            transform-origin: 0 100%; /* Точка з'єднання зліва внизу */
+            left: -30%;
+            transform: rotate(-45deg);
+            transform-origin: 100% 100%;
         }
 
         .heart-shape::after {
-            left: 50%;
-            transform: translateX(-50%) rotate(45deg);
-            transform-origin: 100% 100%; /* Точка з'єднання справа внизу */
+            left: 30%;
+            transform: rotate(45deg);
+            transform-origin: 0 100%;
         }
 
         @keyframes floatUp {
@@ -937,34 +933,42 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
     <div class="loading" id="loading">
         <svg class="loading-heart" viewBox="0 0 100 100">
             <path fill="#ff6b9d" d="M50 88.9L12.5 51.4c-10.3-10.3-10.3-27 0-37.3 10.3-10.3 27-10.3 37.3 0l.2.2.2-.2c10.3-10.3 27-10.3 37.3 0 10.3 10.3 10.3 27 0 37.3L50 88.9z"/>
         </svg>
     </div>
 
+    <!-- Stars Background -->
     <div class="stars" id="stars"></div>
 
+    <!-- Hearts Container -->
     <div class="hearts-container" id="heartsContainer"></div>
 
+    <!-- Big Heart Animation -->
     <div class="big-heart-container" id="bigHeartContainer">
         <svg class="big-heart" viewBox="0 0 100 100">
             <path fill="#ff6b9d" d="M50 88.9L12.5 51.4c-10.3-10.3-10.3-27 0-37.3 10.3-10.3 27-10.3 37.3 0l.2.2.2-.2c10.3-10.3 27-10.3 37.3 0 10.3 10.3 10.3 27 0 37.3L50 88.9z"/>
         </svg>
     </div>
 
+    <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
 
+    <!-- Main Content -->
     <div class="main-content">
         <header class="header">
             <h1 class="title">💕 Valentine Hearts 💕</h1>
             <p class="subtitle">Share your love with floating hearts</p>
         </header>
 
+        <!-- Message Display -->
         <div class="message-display">
             <p class="current-message" id="currentMessage">Click a heart or wait for magic...</p>
         </div>
 
+        <!-- Controls -->
         <div class="controls">
             <button class="btn btn-primary" id="newMessageBtn">💝 New Message</button>
             <button class="btn btn-secondary" id="burstBtn">💖 Heart Burst</button>
@@ -973,6 +977,7 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
             <button class="btn btn-share" id="shareBtn">🔗 Share</button>
         </div>
 
+        <!-- Stats -->
         <div class="stats">
             <div class="stat-item">
                 <div class="stat-value" id="heartsCreated">0</div>
@@ -988,11 +993,13 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
             </div>
         </div>
 
+        <!-- Footer -->
         <footer class="footer">
             Made with 💕 | <a href="#" id="openSettingsLink">Customize your experience</a>
         </footer>
     </div>
 
+    <!-- Settings Modal -->
     <div class="modal-overlay" id="settingsModal">
         <div class="modal">
             <div class="modal-header">
@@ -1000,6 +1007,7 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                 <button class="modal-close" id="closeSettingsBtn">&times;</button>
             </div>
             <div class="modal-body">
+                <!-- Animation Settings -->
                 <div class="modal-section">
                     <h3 class="section-title">🎨 Animation Settings</h3>
                     
@@ -1044,6 +1052,7 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                     </div>
                 </div>
 
+                <!-- Custom Messages -->
                 <div class="modal-section">
                     <h3 class="section-title">💌 Love Messages</h3>
                     <div class="input-group">
@@ -1054,6 +1063,7 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                     <div class="messages-list" id="messagesList"></div>
                 </div>
 
+                <!-- Share URL -->
                 <div class="modal-section">
                     <h3 class="section-title">🔗 Share Your Configuration</h3>
                     <div class="url-section">
@@ -1065,6 +1075,7 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                     </div>
                 </div>
 
+                <!-- Restore Settings -->
                 <div class="modal-section">
                     <h3 class="section-title">🔧 Reset Options</h3>
                     <div class="url-buttons">
@@ -1076,6 +1087,7 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
         </div>
     </div>
 
+    <!-- Share Modal -->
     <div class="modal-overlay" id="shareModal">
         <div class="modal">
             <div class="modal-header">
@@ -1120,12 +1132,12 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                     "Love you to the moon and back 🌙",
                     "You're my favorite person 💖",
                     "Together is my favorite place 🏠",
-                    "You complete me 💑",
+                    "You complete me 💕",
                     "My heart belongs to you 💝",
                     "You're the best thing that ever happened to me ✨",
                     "I fall in love with you every day 💘",
                     "You're my happily ever after 👑",
-                    "Love is in the air 💨💕",
+                    "Love is in the air 💕",
                     "You're simply amazing 🌟",
                     "My love for you is infinite ∞",
                     "You're my everything 💫"
@@ -1205,8 +1217,10 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                     }
                 };
 
+                // First check URL parameters
                 const urlConfig = this.parseUrlParams();
                 
+                // If URL has parameters, use them
                 if (Object.keys(urlConfig).length > 0) {
                     const state = { ...defaultState };
                     
@@ -1220,6 +1234,7 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                     return state;
                 }
 
+                // Otherwise, load from localStorage
                 try {
                     const saved = localStorage.getItem('valentineHeartsState');
                     if (saved) {
@@ -1255,10 +1270,12 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                 this.startHeartAnimation();
                 this.startMessageRotation();
 
+                // Hide loading screen
                 setTimeout(() => {
                     document.getElementById('loading').classList.add('hide');
                 }, 1000);
 
+                // Click anywhere for hearts
                 document.addEventListener('click', (e) => this.createClickHeart(e));
             }
 
@@ -1279,6 +1296,7 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
             }
 
             bindEvents() {
+                // Main Buttons
                 document.getElementById('newMessageBtn').addEventListener('click', () => this.showRandomMessage());
                 document.getElementById('burstBtn').addEventListener('click', () => this.createHeartBurst());
                 document.getElementById('toggleAnimationBtn').addEventListener('click', () => this.toggleAnimation());
@@ -1289,16 +1307,19 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                     this.openModal('settingsModal');
                 });
 
+                // Settings Modal
                 document.getElementById('closeSettingsBtn').addEventListener('click', () => this.closeModal('settingsModal'));
                 document.getElementById('settingsModal').addEventListener('click', (e) => {
                     if (e.target.id === 'settingsModal') this.closeModal('settingsModal');
                 });
 
+                // Share Modal
                 document.getElementById('closeShareBtn').addEventListener('click', () => this.closeModal('shareModal'));
                 document.getElementById('shareModal').addEventListener('click', (e) => {
                     if (e.target.id === 'shareModal') this.closeModal('shareModal');
                 });
 
+                // Settings Sliders
                 document.getElementById('speedSlider').addEventListener('input', (e) => {
                     this.state.settings.speed = parseInt(e.target.value);
                     document.getElementById('speedValue').textContent = e.target.value + 's';
@@ -1341,11 +1362,13 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                     }
                 });
 
+                // Custom Messages
                 document.getElementById('addMessageBtn').addEventListener('click', () => this.addCustomMessage());
                 document.getElementById('customMessageInput').addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') this.addCustomMessage();
                 });
 
+                // URL Buttons
                 document.getElementById('copyUrlBtn').addEventListener('click', () => this.copyShareUrl());
                 document.getElementById('generateUrlBtn').addEventListener('click', () => this.updateShareUrl());
                 document.getElementById('copyShareUrlBtn').addEventListener('click', () => this.copyShareUrl());
@@ -1353,13 +1376,16 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                     window.open(this.generateShareUrl(), '_blank');
                 });
 
+                // Social Share
                 document.getElementById('shareWhatsAppBtn').addEventListener('click', () => this.shareVia('whatsapp'));
                 document.getElementById('shareTelegramBtn').addEventListener('click', () => this.shareVia('telegram'));
                 document.getElementById('shareEmailBtn').addEventListener('click', () => this.shareVia('email'));
 
+                // Reset Buttons
                 document.getElementById('restoreDefaultsBtn').addEventListener('click', () => this.restoreDefaults());
                 document.getElementById('clearDataBtn').addEventListener('click', () => this.clearAllData());
 
+                // Handle visibility change
                 document.addEventListener('visibilitychange', () => {
                     if (document.hidden) {
                         this.pauseAnimation();
@@ -1368,8 +1394,10 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                     }
                 });
 
+                // Handle resize
                 window.addEventListener('resize', () => this.handleResize());
 
+                // Keyboard shortcuts
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape') {
                         this.closeModal('settingsModal');
@@ -1404,6 +1432,7 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                 navigator.clipboard.writeText(url).then(() => {
                     this.showToast('URL copied to clipboard! 💕');
                 }).catch(() => {
+                    // Fallback for older browsers
                     const textarea = document.createElement('textarea');
                     textarea.value = url;
                     document.body.appendChild(textarea);
@@ -1470,19 +1499,26 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                     this.updateStats();
                     this.updateShareUrl();
                     this.restartHeartAnimation();
+                    
+                    // Clear URL parameters
                     window.history.replaceState({}, document.title, window.location.pathname);
+                    
                     this.showToast('All data cleared! Fresh start! 💕');
                 }
             }
 
             applySettings() {
                 const { speed, frequency, size, autoMessages, sound } = this.state.settings;
+                
                 document.getElementById('speedSlider').value = speed;
                 document.getElementById('speedValue').textContent = speed + 's';
+                
                 document.getElementById('frequencySlider').value = frequency;
                 document.getElementById('frequencyValue').textContent = (frequency / 1000).toFixed(1) + 's';
+                
                 document.getElementById('sizeSlider').value = size;
                 document.getElementById('sizeValue').textContent = size + 'px';
+                
                 document.getElementById('autoMessagesToggle').checked = autoMessages;
                 document.getElementById('soundToggle').checked = sound;
             }
@@ -1501,7 +1537,6 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                 const rotation = Math.random() * 720 - 360;
                 const sway = Math.random() * 60 - 30;
 
-                // Передаємо обраний колір у CSS-змінну --heart-color
                 heart.style.cssText = `
                     left: ${startX}px;
                     width: ${size}px;
@@ -1513,9 +1548,9 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                     animation-duration: ${duration}s;
                 `;
 
-                // Внутрішня структура серця (без дублювання кольору в JS)
-                heart.innerHTML = `<div class="heart-shape"></div>`;
+                heart.innerHTML = `<div class="heart-shape" style="--heart-color: ${color}"></div>`;
 
+                // Add message to heart
                 const allMessages = [...this.state.messages, ...this.state.customMessages];
                 const message = allMessages[Math.floor(Math.random() * allMessages.length)];
                 heart.dataset.message = message;
@@ -1527,10 +1562,12 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
 
                 container.appendChild(heart);
 
+                // Update stats
                 this.state.stats.heartsCreated++;
                 this.updateStats();
                 this.saveState();
 
+                // Remove heart after animation
                 setTimeout(() => {
                     if (heart.parentNode) {
                         heart.remove();
@@ -1539,14 +1576,23 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
             }
 
             onHeartClick(heart, message) {
+                // Show message
                 this.showMessage(message);
+
+                // Play sound
                 if (this.state.settings.sound) {
                     this.playHeartSound();
                 }
+
+                // Create burst effect
                 this.createMiniHeartBurst(heart.getBoundingClientRect());
+
+                // Update stats
                 this.state.stats.heartsClicked++;
                 this.updateStats();
                 this.saveState();
+
+                // Remove clicked heart
                 heart.style.animation = 'none';
                 heart.style.transform = 'scale(0)';
                 heart.style.transition = 'transform 0.3s ease';
@@ -1577,6 +1623,7 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                     setTimeout(() => this.createFloatingHeart(), i * 50);
                 }
 
+                // Show big heart
                 const bigHeart = document.getElementById('bigHeartContainer');
                 bigHeart.classList.add('show');
                 setTimeout(() => bigHeart.classList.remove('show'), 1000);
@@ -1587,6 +1634,7 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
             }
 
             createClickHeart(e) {
+                // Don't create hearts on interactive elements
                 if (e.target.closest('button, input, .toggle-switch, .slider, .message-item, .modal, a')) {
                     return;
                 }
@@ -1606,7 +1654,7 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
             showMessage(message) {
                 const messageEl = document.getElementById('currentMessage');
                 messageEl.style.animation = 'none';
-                messageEl.offsetHeight; 
+                messageEl.offsetHeight; // Trigger reflow
                 messageEl.style.animation = 'messageChange 0.5s ease';
                 messageEl.textContent = message;
 
@@ -1651,14 +1699,19 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
             renderMessagesList() {
                 const container = document.getElementById('messagesList');
                 container.innerHTML = '';
+
+                // Custom messages first
                 this.state.customMessages.forEach((msg, index) => {
                     const item = this.createMessageItem(msg, index, true);
                     container.appendChild(item);
                 });
+
+                // Default messages
                 this.state.messages.forEach((msg, index) => {
                     const item = this.createMessageItem(msg, index, false);
                     container.appendChild(item);
                 });
+
                 if (this.state.customMessages.length === 0 && this.state.messages.length === 0) {
                     container.innerHTML = '<p style="color: var(--light-pink); text-align: center; padding: 20px;">No messages yet. Add your first one! 💕</p>';
                 }
@@ -1689,6 +1742,8 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                 this.heartInterval = setInterval(() => {
                     this.createFloatingHeart();
                 }, this.state.settings.frequency);
+                
+                // Create initial hearts
                 for (let i = 0; i < 5; i++) {
                     setTimeout(() => this.createFloatingHeart(), i * 200);
                 }
@@ -1742,15 +1797,20 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
                 if (!this.audioContext) {
                     this.initAudio();
                 }
+
                 try {
                     const oscillator = this.audioContext.createOscillator();
                     const gainNode = this.audioContext.createGain();
+
                     oscillator.connect(gainNode);
                     gainNode.connect(this.audioContext.destination);
+
                     oscillator.frequency.setValueAtTime(800, this.audioContext.currentTime);
                     oscillator.frequency.exponentialRampToValueAtTime(400, this.audioContext.currentTime + 0.1);
+
                     gainNode.gain.setValueAtTime(0.3, this.audioContext.currentTime);
                     gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.2);
+
                     oscillator.start(this.audioContext.currentTime);
                     oscillator.stop(this.audioContext.currentTime + 0.2);
                 } catch (e) {
@@ -1759,12 +1819,14 @@ Copyright (c) 2025 Yuliya Kolesnikova <0009-0000-6151-7415@orcid.org>
             }
 
             handleResize() {
+                // Recreate stars on significant resize
                 const stars = document.getElementById('stars');
                 stars.innerHTML = '';
                 this.createStars();
             }
         }
 
+        // Initialize application
         document.addEventListener('DOMContentLoaded', () => {
             new ValentineHearts();
         });
